@@ -1,0 +1,217 @@
+@import url("https://fonts.googleapis.com/css2?family=IBM+Plex+Serif:wght@500;600&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap");
+
+:root {
+  --paper: #edf1e7;
+  --card: #f7f9f4;
+  --ink: #1b2a22;
+  --ink-muted: #5c6b5f;
+  --line: #c7d0be;
+  --stamp-blue: #1b4b8f;
+  --stamp-green: #1f6b4a;
+  --stamp-red: #8f2a1b;
+}
+
+.claim-page {
+  min-height: 100vh;
+  background: var(--paper);
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding: 32px 16px;
+  font-family: "IBM Plex Sans", sans-serif;
+  color: var(--ink);
+}
+
+.claim-ticket {
+  width: 100%;
+  max-width: 380px;
+  background: var(--card);
+  border-radius: 4px;
+  box-shadow: 0 1px 2px rgba(27, 42, 34, 0.06), 0 8px 24px rgba(27, 42, 34, 0.08);
+  overflow: hidden;
+}
+
+.claim-ticket__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px 24px 0;
+}
+
+.claim-ticket__brand {
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  color: var(--ink-muted);
+}
+
+.claim-ticket__stamp {
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  padding: 4px 10px;
+  border: 1.5px solid currentColor;
+  border-radius: 3px;
+  transform: rotate(-4deg);
+  text-transform: uppercase;
+}
+
+.claim-ticket__stamp--locked {
+  color: var(--stamp-blue);
+}
+.claim-ticket__stamp--released {
+  color: var(--stamp-green);
+}
+.claim-ticket__stamp--refunded {
+  color: var(--stamp-red);
+}
+
+.claim-ticket__qr-window {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 28px 24px 24px;
+  gap: 16px;
+}
+
+.claim-ticket__qr-box {
+  padding: 16px;
+  background: #ffffff;
+  border-radius: 6px;
+  border: 1px solid var(--line);
+}
+
+.claim-ticket__instruction {
+  text-align: center;
+  font-size: 15px;
+  line-height: 1.5;
+  color: var(--ink);
+  max-width: 260px;
+}
+
+.claim-ticket__instruction strong {
+  font-weight: 600;
+}
+
+.claim-ticket__perforation {
+  position: relative;
+  height: 0;
+  border-top: 2px dashed var(--line);
+  margin: 0 0;
+}
+
+.claim-ticket__perforation::before,
+.claim-ticket__perforation::after {
+  content: "";
+  position: absolute;
+  top: -10px;
+  width: 20px;
+  height: 20px;
+  background: var(--paper);
+  border-radius: 50%;
+}
+.claim-ticket__perforation::before {
+  left: -10px;
+}
+.claim-ticket__perforation::after {
+  right: -10px;
+}
+
+.claim-ticket__details {
+  padding: 22px 24px 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.claim-ticket__row {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.claim-ticket__label {
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ink-muted);
+  white-space: nowrap;
+}
+
+.claim-ticket__value {
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 13px;
+  text-align: right;
+  word-break: break-all;
+  color: var(--ink);
+}
+
+.claim-ticket__amount {
+  font-family: "IBM Plex Serif", serif;
+  font-size: 28px;
+  font-weight: 600;
+  color: var(--ink);
+}
+
+.claim-page__state {
+  text-align: center;
+  padding: 48px 24px;
+  color: var(--ink-muted);
+  font-size: 15px;
+}
+
+.claim-page__state--error {
+  color: var(--stamp-red);
+}
+
+.claim-ticket__debug {
+  margin: 0 24px 24px;
+  padding-top: 16px;
+  border-top: 1px solid var(--line);
+}
+
+.claim-ticket__debug summary {
+  font-size: 12px;
+  color: var(--ink-muted);
+  cursor: pointer;
+}
+
+.claim-ticket__debug-button {
+  margin-top: 10px;
+  width: 100%;
+  padding: 10px;
+  font-family: "IBM Plex Sans", sans-serif;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--card);
+  background: var(--ink);
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.claim-ticket__debug-button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .claim-ticket {
+    animation: claim-ticket-in 320ms ease-out;
+  }
+}
+
+@keyframes claim-ticket-in {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

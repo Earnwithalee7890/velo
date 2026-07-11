@@ -82,7 +82,10 @@ export async function cashRoutes(app: FastifyInstance) {
 
     const baseUrl = process.env.FRONTEND_BASE_URL ?? "https://app.velo.cash";
     reply.code(201).send({
-      claim_url: `${baseUrl}/claim/${tradeId}`,
+      // The secret rides in the URL itself, not in any GET response —
+      // whoever holds this link holds the claim. See ClaimQR.tsx: it
+      // reads `secret` from the query string, never from the API.
+      claim_url: `${baseUrl}/claim/${tradeId}?secret=${secretHex}`,
       qr_payload: `velo://claim?request_id=${tradeId}&secret=${secretHex}&contract=${ESCROW_CONTRACT_ID}`,
       instructions: "Show this QR to the cash provider to receive your cash.",
     });
