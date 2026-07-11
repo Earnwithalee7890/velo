@@ -1,10 +1,21 @@
-import Fastify from "fastify";
+ import Fastify from "fastify";
+import cors from "@fastify/cors";
 import "dotenv/config";
 import { cashRoutes } from "./routes/cash.js";
 import { reputationRoutes } from "./routes/reputation.js";
 import { servicesRoutes } from "./routes/services.js";
 
 export const app = Fastify({ logger: true });
+
+// Allow the mobile frontend (and other trusted origins) to call this API
+// from the browser. Locked to specific origins rather than "*" since
+// this API also handles authenticated/paid requests later.
+app.register(cors, {
+  origin: [
+    "http://localhost:5181",
+    process.env.FRONTEND_BASE_URL ?? "http://localhost:5181",
+  ],
+});
 
 /**
  * x402 gate — every paid route calls this. If no valid X-Payment header
