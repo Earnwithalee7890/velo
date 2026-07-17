@@ -167,11 +167,10 @@ export async function cashRoutes(app: FastifyInstance) {
       const paid = await (app as any).requirePayment(req, reply, "0.01");
       if (!paid) return;
 
-      const { seller, buyer, amount_stroops, secret_hash } = req.body ?? ({} as CashRequestBody);
-      if (!seller || !buyer || !amount_stroops || !secret_hash) {
-        reply.code(400).send({ error: "seller, buyer, amount_stroops, and secret_hash are required" });
-        return;
-      }
+      const body = parseBody(cashRequestSchema, req.body, reply);
+      if (!body) return;
+
+      const { seller, buyer, amount_stroops, secret_hash } = body;
 
       const tradeId = randomHex32();
 
