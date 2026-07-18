@@ -7,6 +7,7 @@ import ClaimQR from "./pages/ClaimQR.js";
 import RegisterProvider from "./pages/RegisterProvider.js";
 import Dashboard from "./pages/Dashboard.js";
 import Chat from "./pages/Chat.js";
+import MerchantScan from "./pages/MerchantScan.js";
 import { ErrorBoundary } from "./components/ErrorBoundary.js";
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
@@ -23,6 +24,7 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
               directly into chat. */}
           <Route path="/claim/:id" element={<ClaimQR />} />
           <Route path="/chat/:tradeId" element={<Chat />} />
+          <Route path="/merchant/scan" element={<MerchantScan />} />
         </Routes>
       </BrowserRouter>
     </ErrorBoundary>

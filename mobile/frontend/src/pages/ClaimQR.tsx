@@ -257,7 +257,7 @@ export default function ClaimQR() {
           </div>
         )}
 
-        {status.status === 'locked' && secret && (
+        {import.meta.env.DEV && status.status === 'locked' && secret && (
           <details className="claim-ticket__debug">
             <summary>Testnet: simulate provider scan</summary>
             <button
